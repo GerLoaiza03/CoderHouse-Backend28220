@@ -9,7 +9,8 @@ class Usuario {
     }
 
     getFullName() {
-        return "El Nombre del usuario es: " + this.nombre + " " + this.apellido
+        // return "El Nombre del usuario es: " + this.nombre + " " + this.apellido
+        return `El Nombre del usuario es ${this.nombre} ${this.apellido} `
     }
 
     addMascota(mascota) {
@@ -17,7 +18,8 @@ class Usuario {
     }
 
     countMascotas() {
-        return "Tiene " + this.mascotas.length + " mascotas"
+        // return "Tiene " + this.mascotas.length + " mascotas"
+        return `Tiene ${this.mascotas.length} mascotas`
     }   
 
     addBook(nombre, autor) {
