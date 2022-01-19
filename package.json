@@ -1,0 +1,22 @@
+{
+  "name": "desafios",
+  "version": "1.0.0",
+  "description": "Desafios CoderHouse",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GerLoaiza03/CoderHouse-Backend28220.git"
+  },
+  "author": "German Loaiza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GerLoaiza03/CoderHouse-Backend28220/issues"
+  },
+  "homepage": "https://github.com/GerLoaiza03/CoderHouse-Backend28220#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
