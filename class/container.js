@@ -5,7 +5,7 @@ class Container {
         try {
             let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
             let products = JSON.parse(data);
-            if (products.some((pro) => pro.title === product.title)) 
+            if (products.some((pro) => pro.title === product.title))
             {
                 return { 
                     status: "error", 
@@ -22,7 +22,8 @@ class Container {
             try {
                 await fs.promises.writeFile(
                     "./files/productos.txt",
-                    JSON.stringify(products, null, 2));
+                    JSON.stringify(products, null, 2)
+                    );
                 return { 
                     status: "success", 
                     message: "Producto Almacenado Exitosamente" };
@@ -63,23 +64,32 @@ class Container {
         try {
             let data = await fs.promises.readFile("./files/productos.txt", "utf-8");    
             let products = JSON.parse(data);
-            let product = products.filter((product) => product.id === id);
-            if (product) {
-                return { 
-                    status: "successs", 
-                    product: product 
+            let product = products.find((product) => product.id === id);
+            // let product = products.filter((product) => product.id === id);// filter devuelve array, por ello lo cambio a find que devuelve un valor como tal, en este caso un objeto
+            if (products.length > 0) {
+                if (product) {
+                    return { 
+                        status: "successs", 
+                        payload: product 
+                    };
+                } else {
+                    return {
+                        status: "error",
+                        product: null,
+                        message: "Producto no Encontrado"
+                    };
+                }
+            } else {
+                return{
+                    status: "error",
+                    product: null,
+                    message: "Producto no Encontrado"
                 };
-        } else {
+            }
+        }catch (error) {
             return {
                 status: "error",
-                product: null,
-                message: "Producto no Encontrado"
-            };
-        }
-        } catch (error) {
-            return {
-                status: "error",
-                message: "No se encontró el Producto"
+                message: "No se encontró el Producto" + error
             };
         }
     }
@@ -116,39 +126,36 @@ class Container {
             );
             return { 
                 status: "success", 
-                message: "Producto Eliminado Exitosamente" };
+                message: "Producto Eliminado Exitosamente" 
+            };
         } catch (error) {
             return {
                 status: "Error",
-                message: "No se encontró el Producto a Eliminar"
+                message: "No se encontró el Producto a Eliminar" + error
             };
         }
     }
 
     async deleteAll() {
         try {
-        await fs.promises.writeFile(
-            "./files/productos.txt", 
-            JSON.stringify([])
-        );
-
-        return { 
-            status: "success", 
-            message: "Productos Eliminados Exitosamente" };
-        } catch (error) {
-        return {
-            status: "error",
-            message: "No se Pudieron Eliminar los Productos"
-        };
+            await fs.promises.writeFile("./files/productos.txt", JSON.stringify([]));
+            return { 
+                status: "success", 
+                message: "Productos Eliminados Exitosamente" };
+            } catch (error) {
+                return {
+                    status: "error",
+                    message: "No se Pudieron Eliminar los Productos"
+                };
+            }
         }
-    }
 
     async getProductoRandom() {
         try {
             let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
             let products = JSON.parse(data);
             let randomNumber = Math.floor(Math.random() * products.length);
-            console.log(randomNumber);
+            console.log("RANDOM", randomNumber);
             let randomProduct = products[randomNumber];
             return {
                 status: "success",
@@ -157,9 +164,41 @@ class Container {
             };
         } catch (error) {
             return {
-                status: "Error",
+                status: "error",
                 message: "No se pudo encontrar el producto" + error
             };
+        }
+    }
+
+
+    async updateProduct(id, body) {
+        try {
+            let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
+            let products = JSON.parse(data);
+            if (!products.some((product) => product.id === id))
+            return {
+                status: "error",
+                message: "No hay productos con el id especificado"
+            };
+            
+            let result = products.map((product) => {
+                if (product.id === id) {
+                body = Object.assign(body);
+                body = Object.assign({ id: product.id, ...body });
+                return body;
+            } else {
+                return product;
+            }
+        });
+        try {
+            await fs.promises.writeFile("./files/productos.txt", JSON.stringify(result, null, 2)
+            );
+            return { status: "success", message: "Producto actualizado" };
+        } catch {
+            return { status: "error", message: "Error al actualizar producto" };
+        }
+        } catch (error) {
+            return { status: "error", message: "Fallo al actualizar producto" }
         }
     }
 }
