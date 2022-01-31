@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
     res.send(`<h1> Saludo Tutora, Esta es la Entrega "Desafío Cuatro", Author: Germán Loaiza\n <ul> <li>GET. '/api/productos'\n</li> <li>GET. '/api/products/:id'\n</li> <li>POST. '/api/products'\n
-    <li>PUT. '/api/products/:id'\n</li><li>DELETE. '/api/products/:id'\n</li><li>FORMULARIO. '/index.html'\n <a href="./form.html">Ingrese al Form<a/></li></ul></h1>`);
+    <li>PUT. '/api/products/:id'\n</li><li>DELETE. '/api/products/:id'\n</li><li>FORMULARIO. '/form.html'\n <a href="./form.html">Ingrese al Form<a/></li></ul></h1>`);
 });
 
 //Middleware
