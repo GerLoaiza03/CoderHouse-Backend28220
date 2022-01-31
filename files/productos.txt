@@ -28,5 +28,11 @@
     "price": 50000,
     "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_2X_901375-MCO40621122012_012020-F.webp",
     "id": 5
+  },
+  {
+    "title": "MERN GUIA PRACTICA APLICACIONES WEB",
+    "price": 60000,
+    "thumbnail": "https://www.ra-ma.es/media/rama/images/thumbs/edition-105355-236x336.jpg",
+    "id": 6
   }
 ]

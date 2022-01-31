@@ -4,6 +4,11 @@ const router = express.Router();
 const Container = require("../class/container");
 const container = new Container();
 
+const {
+    updateProduct,
+  } = require("../class/container");
+
+
 //GETS
 router.get("/", (req, res) => {
     console.log(req.query);
@@ -36,13 +41,26 @@ router.post("/", (req, res) => {
 });
 
 //PUTS
-router.put("/:pid", (req, res) => {
-    let id = parseInt(req.params.pid);
-    let body = req.body;
-    container.updateProduct(id, body).then((result) => {
-        res.send(result);
-    });
-});
+// router.put("/:pid", (req, res) => {
+//     let id = parseInt(req.params.pid);
+//     let body = req.body;
+//     container.updateProduct(id, body).then((result) => {
+//         res.send(result);
+//     });
+// });
+
+
+// router.put('/:pid', (req, res) => {
+//     let id = parseInt(req.params.pid);
+//     container.updateProduct(id,{
+//         ...req.body,
+//         id: id
+//     });
+//         res.send(container.getById(id));
+// })
+
+router.put("/:pid", updateProduct);
+
 
 //DELETES
 router.delete("/:pid", (req, res) => {
