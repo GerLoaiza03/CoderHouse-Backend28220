@@ -30,9 +30,9 @@
     "id": 5
   },
   {
-    "title": "MERN GUIA PRACTICA APLICACIONES WEB",
-    "price": 60000,
-    "thumbnail": "https://www.ra-ma.es/media/rama/images/thumbs/edition-105355-236x336.jpg",
-    "id": 6
+    "id": 6,
+    "title": "MERN",
+    "price": "65000",
+    "thumbnail": "https://www.ra-ma.es/media/rama/images/thumbs/edition-105355-236x336.jpg"
   }
 ]

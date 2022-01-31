@@ -178,56 +178,37 @@ class Container {
     }
 
 
-    // async updateProduct(id, body) {
-    //     try {
-    //         let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
-    //         let products = JSON.parse(data);
-    //         if (!products.some((product) => product.id === id))
-    //         return {
-    //             status: "error",
-    //             message: "No hay productos con el id especificado"
-    //         };
+    async updateProduct(id, body) {
+        try {
+            let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
+            let products = JSON.parse(data);
+            if (!products.some((product) => product.id === id))
+            return {
+                status: "error",
+                message: "No hay productos con el id especificado"
+            };
             
-    //         let result = products.map((product) => {
-    //             if (product.id === id) {
-    //             body = Object.assign(body);
-    //             body = Object.assign({ id: product.id, ...body });
-    //             return body;
-    //         } else {
-    //             return product;
-    //         }
-    //     });
-    //     try {
-    //         await fs.promises.writeFile("./files/productos.txt", JSON.stringify(result, null, 2)
-    //         );
-    //         return { status: "success", message: "Producto actualizado" };
-    //     } catch {
-    //         return { status: "error", message: "Error al actualizar producto" };
-    //     }
-    //     } catch (error) {
-    //         return { status: "error", message: "Fallo al actualizar producto" }
-    //     }
-    // }
+            let result = products.map((product) => {
+                if (product.id === id) {
+                body = Object.assign(body);
+                body = Object.assign({ id: product.id, ...body });
+                return body;
+            } else {
+                return product;
+            }
+        });
+        try {
+            await fs.promises.writeFile("./files/productos.txt", JSON.stringify(result, null, 2)
+            );
+            return { status: "success", message: "Producto actualizado" };
+        } catch {
+            return { status: "error", message: "Error al actualizar producto" };
+        }
+        } catch (error) {
+            return { status: "error", message: "Fallo al actualizar producto" }
+        }
+    }
 
-
-    
-    // updateProduct(id, body) {
-    //     const products = this.getAll();
-    //     const productIndex = products.findIndexOf((product) => product.id === id);
-    //     const idExist = products.some((product) => product.id === id);
-
-    //     if(!idExist){
-    //         console.log(`El producto con id ${id} no existe, se guardara un nuevo id`);
-    //         this.save(body);
-    //     }
-    //     if (productIndex > -1){
-    //         let id = products[productIndex].id;
-    //         newProduct = {...body, id: id};
-    //         products[productIndex] = body;
-    //         const textProducts = JSON.stringify(products);
-    //         fs.writeFileSync("./files/productos.txt", textProducts);
-    //     }
-    // };
 }
 
 
