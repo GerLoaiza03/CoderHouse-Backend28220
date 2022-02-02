@@ -1,9 +1,14 @@
 //Import express
 const express = require("express");
 
-//Import cors - multer
+// //Import express-handlebars
+// const {engine} = require('express-handlebars');
+
+//Import cors
 const cors = require("cors");
-const multer = require("multer");
+
+//Import uploader
+const upload = require('./services/uploader.js')
 
 //Iniciar
 const app = express();
@@ -18,26 +23,35 @@ const Container = require("./class/container");
 //Instanciar container
 const container = new Container();
 
+
+// app.engine("hbs", engine({extname: ".hbs",partialsDir: __dirname + "/views/partials"
+// }));
+app.set("views", "./views");
+app.set("view engine", "pug");
+
+
 //Import router
 const routerProducts = require("./router/productos");
 
 
 //Configurar para indicar que products pueda recibir json
-app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//Public
+app.use(express.static('public'));
+app.use(cors());
 
 
 //Middleware manejo de errores
 app.use((err, req, res, next) => {
     console.log(err.stack);
-    escape.status(500).send("Error en el servidor");
 });
 
 app.use((req, res, next) => {
     let timestamp = Date.now();
     let time = new Date(timestamp);
-    console.log("Petición hecha a las: " + time.toTimeString().split(" ")[0]);
+    console.log("Petición Realizada a las: " + time.toTimeString().split(" ")[0]);
     next();
 });
 
@@ -49,7 +63,7 @@ app.get("/", (req, res) => {
 //Middleware
 app.use("/api/products", routerProducts);
 
-// //Get random product
+//Get random product
 app.get("/api/productoRandom", (req, res) => {
     try {
     container.getProductoRandom().then((result) => {
@@ -66,3 +80,37 @@ app.get("/api/productoRandom", (req, res) => {
         res.send(res.message);
     }
 });
+
+//Se envía como un form data
+app.post(
+    "/api/uploadfile",
+    upload.fields([
+      {
+        name: "file",
+        maxCount: 1
+      },
+      {
+        name: "documents",
+        maxCount: 3
+      }
+    ]),
+    (req, res) => {
+      const files = req.files;
+      console.log(files);
+      if (!files || files.length === 0) {
+        res.status(500).send({ messsage: "No se subió archivo" });
+      }
+      res.send(files);
+    }
+  );
+  
+  // vista productos en
+  app.get("/view/products", (req, res) => {
+    container.getAll().then((result) => {
+      let info = result.payload;
+      let preparedObject = {
+        products: info
+      };
+      res.render("products.pug", preparedObject);
+    });
+  });

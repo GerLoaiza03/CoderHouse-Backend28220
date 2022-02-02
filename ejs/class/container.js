@@ -6,8 +6,6 @@ class Container {
         this.products = [];
     }
     
-    
-    
     async save(product) {
         try {
             let data = await fs.promises.readFile("./files/productos.txt", "utf-8");
@@ -19,10 +17,10 @@ class Container {
                     message: "El Producto ya Existe" };
             } else {
                 let dataObj = {
+                    id: products.length + 1,
                     title: product.title,
                     price: product.price,
-                    thumbnail: product.thumbnail,
-                    id: products.length + 1
+                    thumbnail: product.thumbnail
                 };    
                 products = [...products, dataObj];
             
@@ -43,10 +41,10 @@ class Container {
         } catch (error) 
         {   //Cuando no Existe el Archivo "productos.txt"
             let dataObj = {
+                id: 1,
                 title: product.title,
                 price: product.price,
-                thumbnail: product.thumbnail,
-                id: 1
+                thumbnail: product.thumbnail
             };
 
             try {

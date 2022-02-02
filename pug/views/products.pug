@@ -1,0 +1,27 @@
+- let exist = products.length > 0
+html
+    include includes/head.pug
+    body
+        h1(class="text-center mb-5")="Vista de Productos"
+            if exist
+                div(class="products-container")
+                    table
+                        thead
+                            tr
+                                th="Name"
+                                th="Price"
+                                th="Image"
+                        tbody
+                        each product in products
+                            tr
+                                td=product.title
+                                td=product.price
+                                td
+                                    img(src=product.thumbnail, width="150")
+
+            
+                button(type="button" onclick="location.href='/'" class="btn btn-info center")="Volver"
+                //- <button type="button" onclick="location.href='/'" class="btn btn-info center">Volver</button>
+                //- h2(class="text-center")="End"
+            else
+                p="You don't have products :/"

@@ -4,6 +4,8 @@ const router = express.Router();
 const Container = require("../class/container");
 const container = new Container();
 
+const upload = require('../services/uploader.js')
+
 const {
     updateProduct,
   } = require("../class/container");
@@ -32,13 +34,16 @@ router.get("/:pid", (req, res) => {
 });
 
 //POSTS
-router.post("/", (req, res) => {
-    let body = req.body;
-    body.price = parseInt(body.price);
-    container.save(body).then((result) => {
-        res.send(result);
+router.post("/", upload.single("image"), (req, res) => {
+    let file = req.file;
+    let product = req.body;
+    product.thumbnail = req.protocol + "://" + req.hostname + ":8080" + "/images/" + file.filename;
+  
+    container.save(product).then((result) => {
+      res.send(result);
     });
-});
+  });
+
 
 //PUTS
 router.put("/:pid", (req, res) => {
