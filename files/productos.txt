@@ -34,5 +34,11 @@
     "title": "MERN",
     "price": "65000",
     "thumbnail": "https://www.ra-ma.es/media/rama/images/thumbs/edition-105355-236x336.jpg"
+  },
+  {
+    "title": "hola",
+    "price": 564654,
+    "thumbnail": "hola",
+    "id": 7
   }
 ]
