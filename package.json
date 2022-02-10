@@ -1,27 +1,26 @@
 {
-  "name": "desafios",
+  "name": "desafio6",
   "version": "1.0.0",
-  "description": "Desafio4, CoderHouse, Backend, Progrmación",
-  "main": "server.js",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.2",
-    "multer": "^1.4.4",
-    "nodemon": "^2.0.15"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node ./src/server.js",
+    "dev": "node ./src/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GerLoaiza03/CoderHouse-Backend28220.git"
   },
-  "author": "Germán Loaiza",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GerLoaiza03/CoderHouse-Backend28220/issues"
   },
-  "homepage": "https://github.com/GerLoaiza03/CoderHouse-Backend28220#readme"
+  "homepage": "https://github.com/GerLoaiza03/CoderHouse-Backend28220#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  }
 }

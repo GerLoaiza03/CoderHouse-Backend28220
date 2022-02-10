@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Domine JavaScript 4 Edicion",
+    "price": "70000",
+    "thumbnail": "https://libreriadelau.vteximg.com.br/arquivos/ids/24011324-1000-1500/bw-domine-javascript-4ordf-edicioacuten-ediciones-de-la-u-9789587923025.jpg?v=637792470776970000",
+    "id": 1
+  }
+]
