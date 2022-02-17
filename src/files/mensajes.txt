@@ -1,8 +1,0 @@
-[
-  {
-    "author": "ger@hotmail.com",
-    "dateTime": "9/2/2022, 22:01:48",
-    "text": "Hola",
-    "id": 1
-  }
-]

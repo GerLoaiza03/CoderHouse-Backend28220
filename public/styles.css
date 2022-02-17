@@ -14,9 +14,9 @@
   body {
       font-family: system-ui, sans-serif;
       background-color: var(--color4);
-      color: var(--color1);
+      color: var(--white);
     }
-    .container {
+    .bck {
       background-color: var(--color4);
     }
     table {
@@ -64,7 +64,7 @@
       margin-top: 40px;
       color: var(--color1);
     }
-     h1, h2{
+     h1{
       color: var(--white);
     }
     label, td{
@@ -83,10 +83,6 @@
       display: flex;
       margin-left: auto;
       margin-right: auto;
-    }
-  
-    label{
-      color: var(--white);
     }
     
     /*MEDIA QUERIES*/
@@ -108,3 +104,4 @@
         width: auto;
       }
     }
+    

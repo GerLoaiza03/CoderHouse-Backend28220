@@ -1,86 +1,161 @@
 <!DOCTYPE html>
-<html lang="es">
-
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <!-- <link rel="stylesheet" href="./css/styles.css" /> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-    integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-    crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-
-  <body>
-    <!-- ########################## INICIO PRODUCTOS ########################## -->
-
-    <div class="container mt-3">
-      <div class="container">
-        <h1>Ingrese producto</h1>
-        <br>
-
-        <!--
-          En firefox no funciona / En Chrone hace que se recargue la pagina y se pierde la conexxion con el websocket
-          <form onsubmit="return agregarProducto(this)">  
-          Solucion: boton Cargar con tag <a> mas abajo
-        -->
-        <div class="form-group">
-            <label for="title"><b>Nombre</b></label>
-            <input id="title" class="form-control" type="text" name="title">
+    <title>1er Pre Entrega Proyecto Final</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>  
+    <!-- PRODUCTOS -->
+    <!-- MODAL EDITAR PRODUCTO -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return editarProducto()" name="formulario1">
+                    <input id="idM" name="prodId" type="hidden" value="">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" id="tituloM" name="titulo" placeholder="Titulo del producto" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="descripcionM" name="descripcion" placeholder="Descripcion del producto" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Codigo</label>
+                        <input type="text" class="form-control" id="codigoM" name="codigo" placeholder="Codigo del producto" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="text" class="form-control" id="stockM" name="stock" placeholder="Stock del producto" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="precioM" name="precio" placeholder="Precio del producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Thumbail</label>
+                        <input type="text" class="form-control" id="thumbailM" name="thumbail" placeholder="Ingrese la url con la imagen del pto">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Editar Producto" class="btn btn-primary" data-bs-dismiss="modal"/> 
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>    
+                </form>
+            </div>
         </div>
-    
-        <div class="form-group">
-            <label for="price"><b>Precio</b></label>
-            <input id="price" class="form-control" type="text" name="price">
         </div>
-    
-        <div class="form-group">
-            <label for="thumbnail"><b>URL Foto</b></label>
-            <input id="thumbnail" class="form-control" type="text" name="thumbnail">
+    </div>
+    <!-- MODAL BORRAR PRODUCTO -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return borrarProducto()" name="formulario1">
+                    <input id="idMB" name="prodId" type="hidden" value="">
+                    Esta seguro que desea eliminar el producto?
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Eliminar" class="btn btn-danger" data-bs-dismiss="modal"/> 
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>    
+                </form>
+            </div>
         </div>
-            <!-- <input class="btn btn-success mt-3 mb-5" type="submit" value="Cargar"> 
+        </div>
+    </div>
+
+    <!-- FORMULARIO PTO -->
+    <div class="container" style="margin-top: 30px;"> 
+        <h3 class="">1ra Pre-Entrega - Germán Loaiza.</h3>
+        <h4 class="">Formulario para agregar nuevo producto</h4>
+        <button onclick="mostrarFormulario()" class="btn btn-primary">Mostrar/Ocultar Formulario</button>
+        <div id="formularioPtos" style="display:none">
+        <form onsubmit="return enviar_formulario()" name="formulario1">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo del producto" >
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion del producto" >
+            </div>
+            <div class="mb-3">
+                <label for="codigo" class="form-label">Codigo</label>
+                <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Codigo del producto" >
+            </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock del producto" >
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio del producto">
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Thumbail</label>
+                <input type="text" class="form-control" id="thumbail" name="thumbail" placeholder="Ingrese la url con la imagen del pto">
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Enviar producto" class="btn btn-primary" />
+            </div> 
+            
         </form>
-        NO funciona, lerr comentario arriba -->
-
-        <a class="btn btn-primary mt-3 mb-5" href='javascript:;' onclick="agregarProducto();" role="button">Registrar Producto</a>
-
-        <div id='listaProductos'></div> <!-- para inyectar la lista de productos desde el js/main.js -->
-      </div>
+        <p>El id sera agregado automaticamente por el backend</p>
+        </div>  
     </div>
 
-    <!-- ########################## FIN PRODUCTOS ########################## -->
-
-    <!-- ########################## INICIO MENSAJES ########################## -->
-
-    <div class="container mt-3">
-      <div class="container dark">
-        <h1>Centro de Mensajes</h1>
-        <br>
-
-        <div class="form-group">
-            <input id="message_dir_email" class="form-control" type="text" name="message_dir_email" placeholder="Ingrese email">
+    <!-- TABLA PRODUCTOS -->
+    <div class="container" style="margin-top: 30px;">
+        <h4 class="">Estos son todos los productos</h4>
+        <div class="table-responsive" style="text-align: center;">
+          <table class="table table-dark" id="tabla">
+            <thead>
+                <tr > <th>Titulo</th> <th>Descripcion</th> <th>Codigo</th> <th>Stock</th> <th>Precio</th> <th>Imagen</th> <th>Agregar al carrito</th> <th>Editar</th> <th>Eliminar</th></tr>
+            </thead>
+            <tbody id="tBody">
+            </tbody>
+          </table>  
         </div>
-        <hr>
-
-        <div id='listaMensajes' class='bg-white'></div>
-        <br>
-
-        <div class="form-group">
-            <input id="message_text" class="form-control" type="text" name="message_text" placeholder="Ingrese tu mensaje">
-            <a class="btn btn-success mt-3 mb-5" href='javascript:;' onclick="enviarMensaje();" role="button">Enviar</a>
-        </div>
-
-      </div>
     </div>
-    <br>
 
-    <!-- ########################## FIN MENSAJES ########################## -->
+    <!-- CARRITO -->
+    <div class="container" style="margin-top: 30px;"> 
+        <h4 class="">Carrito</h4>
+        <!-- TABLA CARRITO -->
+        <div class="mb-3">
+            <div class="table-responsive  style="text-align: center;">
+                <table class="table table-dark"">
+                  <thead>
+                      <tr> <th>Producto</th> <th>Precio</th> <th>Imagen</th><th>Borrar del carrito</th> </tr>
+                  </thead>
+                  <tbody id="tBodyCarrito">
+                  </tbody>
+                </table>  
+            </div>
+        </div>
+    </div>   
 
-  </body>
 
+    <!-- SCRIPTS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 </html>

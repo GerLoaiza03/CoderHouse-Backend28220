@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "timestamp": "14/2 - 1:5:40",
+    "productos": [
+      {
+        "id": 4,
+        "timestamp": "14/2 - 11:20:20",
+        "nombre": "Domine JavaScript",
+        "descripcion": "Libro Programacion",
+        "codigo": "1003",
+        "thumbail": "https://libreriadelau.vteximg.com.br/arquivos/ids/24011324-1000-1500/bw-domine-javascript-4ordf-edicioacuten-ediciones-de-la-u-9789587923025.jpg?v=637792470776970000",
+        "precio": "70000",
+        "stock": "5"
+      }
+    ]
+  }
+]
