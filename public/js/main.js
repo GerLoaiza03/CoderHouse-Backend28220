@@ -79,3 +79,5 @@ function renderizarMensajes(mensajes) {
 
 socket.on('lista-productos', productos => { renderizarProductos(productos); });
 socket.on('lista-mensajes', mensajes => { renderizarMensajes(mensajes); });
+
+
