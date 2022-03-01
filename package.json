@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node .",
+    "start": "node .",
+    "dev:mysql": "node ./src/create_products_table.js",
+    "dev:sqlite3": "node ./src/create_messages_table.js",
     "dev": "node ./src/server.js"
   },
   "repository": {
