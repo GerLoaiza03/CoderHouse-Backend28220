@@ -1,8 +1,0 @@
-1. Ingresamos a MariaDB Monitor desde consola cmd: "mysql -u root"
-2. Creamos database ecommerce mediante comando : "create database ecommerce;"
-3. Creamos Usuario en MariaDB: "CREATE USER 'gerloaiza'@localhost IDENTIFIED BY 'F0ns02030*+';"
-4. Concedemos todos los permisos a usuario en base datos "ecommerce": "GRANT ALL PRIVILEGES ON ecommerce.* TO gerloaiza@localhost;"
-5. Creamos tabla productos mediante MariaDB ejecutando codigo en terminal bash: "npm run dev:mysql"
-6. Creamos tabla mensajes mediante SQLite3 ejecutando codigo en terminal bash: "npm run dev:sqlite3"
-7. Ejecutamos npm install para instalar/actualizar dependencias en caso de ser necesario
-8. Ejecutamos App mediante codigo en terminal bash: "npm start"
