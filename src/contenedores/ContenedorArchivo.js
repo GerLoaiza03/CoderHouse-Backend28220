@@ -1,18 +1,16 @@
-// const { captureRejections } = require('events');
 const fs = require('fs');
-// const { mainModule } = require('process');
 
-class Contenedor {
+class ContenedorArchivo {
 
     constructor(name) {
         this.name = name;
     }
 
-    async read() {
+     async read() {
         try {
-            let data = await fs.promises.readFile("./" + this.name, "utf-8");
+            let data = await fs.promises.readFile(this.name, 'utf8');
             return data;
-            
+                 
         } catch (error) {
             throw Error("Error al leer el archivo");
         }
@@ -20,7 +18,7 @@ class Contenedor {
 
     async write(datos, msg) {
         try {
-            await fs.promises.writeFile("./" + this.name, JSON.stringify(datos, null, 2));
+            await fs.promises.writeFile(this.name, JSON.stringify(datos, null, 2));
             console.log(msg);
         } catch (error) {
             throw Error("Error al escribir en el archivo");
@@ -40,7 +38,8 @@ class Contenedor {
                 newProduct = [product];
                 await this.write(newProduct, "Se agrego el primer producto");
             } else {
-                product.id = datos[datos.length - 1].id + 1;
+                product.id = parseInt(datos[datos.length - 1].id) + 1;
+                product.id = `${product.id}`
                 newProduct = product;
                 datos.push(newProduct);
                 await this.write(datos, "Producto agregado correctamente");
@@ -57,9 +56,13 @@ class Contenedor {
         try{
             let data = await this.read();
             let datos = JSON.parse(data);
-    
             let result = datos.filter( product => product.id == num);
-            return result;
+            if (result.length != 0){
+                return result[0]
+            }else{
+                return false;
+            }
+
         }
         catch(error){
             throw Error("Error en getById");
@@ -75,7 +78,7 @@ class Contenedor {
             return datos;
         }
         catch(error){
-            throw Error("Error en el getAll");
+            console.log(error)
         };
 
     }
@@ -111,8 +114,25 @@ class Contenedor {
             throw Error("Error en el deleteAll()");
         }
     }
+
+    async update(item) {
+        let ptoMod = await this.getById(item.id);
+        if (Object.keys(ptoMod).length != 0) {
+            //Pto con ID encontrado
+            //Armado de un array con todos los PTOS
+            let todosPtos = await this.read();
+            todosPtos = (JSON.parse(todosPtos, null, 2));
+            //Modifico el array con el PTO modificado
+            let auxId = item.id - 1;
+            todosPtos.splice(auxId, 1, item);
+            //Escribo el archivo
+            await this.write(todosPtos, "Producto modificado correctamente");
+            //Envio respuesta
+            return todosPtos;
+        }
+    }
     
     
 }
 
-module.exports = Contenedor;
+module.exports = ContenedorArchivo;

@@ -1,13 +1,11 @@
 {
-  "name": "desafio6",
+  "name": "coderhouse-backend28220",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "node server.js"
-    
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +19,10 @@
   },
   "homepage": "https://github.com/GerLoaiza03/CoderHouse-Backend28220#readme",
   "dependencies": {
-    "express": "^4.17.2",
-    "socket.io": "^4.4.1"
+    "express": "^4.17.3",
+    "firebase-admin": "^10.0.2",
+    "mongoose": "^6.2.6",
+    "socket.io": "^4.4.1",
+    "uuid": "^8.3.2"
   }
 }

@@ -1,14 +1,13 @@
 const express = require("express");
-const Contenedor = require("../persistence/claseContenedor.js");
+const Daos = require("../src/daos/configDb");
 
 const adminUser = require('./adminUser.js')//
 
 
-const app = express();
-const { Router } = express;
-const router = new Router();
+const router = express.Router()
 
-let productos = new Contenedor("./files/productos.txt");
+
+let productos = Daos.productos;
 
 //FECHA
 function darFecha() {
@@ -24,7 +23,7 @@ router.get("/", (req, res) => {
       res.send(aux);
     }
     catch(error){
-      throw Error("Error en todos los productos");
+      throw Error("Error en todos los productos")
     }  
   }    
   getTodos();
@@ -34,14 +33,13 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) =>{
   async function getxId(){
     try{
-      let ptoId = await productos.getById(parseInt(req.params.id));
+      let ptoId = await productos.getById(req.params.id);
       //Me fijo si existe el PTO con el ID solicitado
-      if (Object.keys(ptoId).length != 0) {
+      if (Object.keys(ptoId).length != 0 ){
         //Pto con ID solicitado encontrado, envio respuesta
-        res.send(ptoId);
-      }
-      //Pto con ID solicitado NO encontrado, envio error
-      else{
+        res.send(ptoId)
+      }else{
+        //Pto con ID solicitado NO encontrado, envio error
         res.status(400);
         res.send({ error : 'producto no encontrado' });
       }
@@ -57,19 +55,18 @@ router.get("/:id", (req, res) =>{
 //POST CON PTO NUEVO ENVIADO POR PARAMETRO
 router.post("/", adminUser , (req, res) => {
   //Armo un nuevo PTO con los datos recibidos por parametro y datos locales como fecha
-  let { nombre, descripcion, codigo, thumbail, precio, stock } = req.body;
+  let { nombre, descripcion, codigo, thumbnail, precio, stock } = req.body;
   let newObj = {
-    id: 0,
     timestamp: darFecha(),
     nombre,
     descripcion,
     codigo,
-    thumbail,
+    thumbnail,
     precio,
     stock
   };
 
-  //Agrego el producto a productos.txt
+  //Agrego el producto
   async function savePto(){
     try {
       await productos.save(newObj);
@@ -82,51 +79,43 @@ router.post("/", adminUser , (req, res) => {
 
   //Variable admin a ser configurada mas adelante, por ahora enviada por query
   //Me fijo si es administrador o no
-  if (req.query.admin == 'true') {
-    savePto();
-  }
-  else{
-    res.status(403);
-    res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
-  }
+  // if (req.query.admin == 'true') {
+  //   savePto();
+  // }
+  // else{
+  //   res.status(403);
+  //   res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
+  // }
 });
 
 //PUT MODIFICANDO SEGUN ID
-router.put("/:id", adminUser , (req, res) =>{
+router.put("/:id", (req, res) =>{
   //Armo un nuevo PTO con los datos recibidos por parametro
-  let { nombre, descripcion, codigo, thumbail, precio, stock } = req.body;
+  let { nombre, descripcion, codigo, thumbnail, precio, stock} = req.body;
+  let ptoMod = {
+    id : req.params.id,
+    timestamp: darFecha(),
+    nombre,
+    descripcion,
+    codigo,
+    thumbnail,
+    precio,
+    stock
+  };
 
   async function modfPto(){
     try {
-      //Busco el producto segun ID
-      let ptoMod = await productos.getById(parseInt(req.params.id));
       //Me fijo si existe el PTO con el ID solicitado
-      if (Object.keys(ptoMod).length != 0) {
-        //Pto con ID encontrado
-        //Armado de un nuevo objeto con los parametros enviados en el body, y parametros locales como fecha
-        ptoMod = {
-          id: parseInt(req.params.id),
-          timestamp: darFecha(),
-          nombre,
-          descripcion,
-          codigo,
-          thumbail,
-          precio,
-          stock
-        };
-        //Armado de un array con todos los PTOS
-        let todosPtos = await productos.read();
-        todosPtos = (JSON.parse(todosPtos, null, 2));
-        //Modifico el array con el PTO modificado
-        let auxId = parseInt(req.params.id) - 1;
-        todosPtos.splice(auxId, 1, ptoMod);
-        //Escribo el archivo
-        await productos.write(todosPtos, "Producto modificado correctamente");
-        //Envio respuesta
-        res.send(todosPtos);
+      let flag = await productos.getById(req.params.id);
+      if (Object.keys(flag).length != 0 ){
+        //Pto con ID solicitado encontrado
+        //Borro el PTO con el ID solicitado, y envio respuesta
+        await productos.update(ptoMod)
+        res.send(ptoMod)  
       }
-      //PTO con ID no encontrado, envio error
       else{
+        //Pto con ID solicitado NO encontrado, envio error
+        res.status(400);
         res.send({ error : 'producto no encontrado' });
       }
     } catch (error) {
@@ -136,29 +125,30 @@ router.put("/:id", adminUser , (req, res) =>{
 
   //Variable admin a ser configurada mas adelante, por ahora enviada por query
   //Me fijo si es administrador o no
-  if (req.query.admin == 'true') {
-    modfPto();
-  }
-  else{
-    res.status(403);
-    res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
-  }
+  // if (req.query.admin == 'true') {
+  //   modfPto();
+  // }
+  // else{
+  //   res.status(403);
+  //   res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
+  // }
 });
 
 //DELETE SEGUN ID
-router.delete("/:id", adminUser , (req,res) =>{
+router.delete("/:id", (req,res) =>{
   async function deletexId(){
     try {
       //Me fijo si existe el PTO con el ID solicitado
-      let flag = await productos.getById(parseInt(req.params.id));
-      if (Object.keys(flag).length != 0) {
+
+      let flag = await productos.getById(req.params.id);
+      if (Object.keys(flag).length != 0 ){
         //Pto con ID solicitado encontrado
         //Borro el PTO con el ID solicitado, y envio respuesta
-        await productos.deleteById(parseInt(req.params.id));
-        res.send(await productos.getAll());   
+        await productos.deleteById(req.params.id);
+        res.send(await productos.getAll()); 
       }
-      //PTO con ID no encontrado, envio error
       else{
+        //PTO con ID no encontrado, envio error
         res.status(400);
         res.send({ error : 'producto no encontrado' });
       }
@@ -169,13 +159,13 @@ router.delete("/:id", adminUser , (req,res) =>{
 
   //Variable admin a ser configurada mas adelante, por ahora enviada por query
   //Me fijo si es administrador o no
-  if (req.query.admin == 'true') {
-     deletexId();
-  }
-  else{
-    res.status(403);
-    res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
-  }
+  // if (req.query.admin == 'true') {
+  //    deletexId();
+  // }
+  // else{
+  //   res.status(403);
+  //   res.send({error: -1, descripcion: `ruta ${req.originalUrl} metodo ${req.method} no autorizada`});
+  // }
 });
 
 //EXPORT MODULO ROUTER
