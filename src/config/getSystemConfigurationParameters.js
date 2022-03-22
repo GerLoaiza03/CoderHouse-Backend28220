@@ -7,7 +7,7 @@ function getSystemConfigurationParameters() {
         ADMIN_USER: true,                      //valores posibles: true o false
         PRODUCT_PERSISTENCE_SUPPORT: 'MONGODB',    //valores posibles: 'FILE' o 'FIREBASE' o 'MONGODB' o 'MEMORY'
         CART_PERSISTENCE_SUPPORT: 'MONGODB',       //valores posibles: 'FILE' o 'FIREBASE' o 'MONGODB' o 'MEMORY'
-        PATH_FIREBASE_ADMIN_SDK_JSON: './config/firebase/ecommerce-a5793-firebase-adminsdk-p60x6-0a1836ea74.json',       //ejemplo: './config/firebase/proyecto-nescub-coderhouse-firebase-adminsdk-3tlsq-ec7b438e54.json'
+        PATH_FIREBASE_ADMIN_SDK_JSON: './config/firebase/ecommerce-a5793-firebase-adminsdk-p60x6-0a1836ea74.json',       //ejemplo: './config/firebase/ecommerce-a5793-firebase-adminsdk-p60x6-0a1836ea74.json'
         CONNECTION_STRING_MONGODB: 'mongodb://127.0.0.1:27017/ecommerce'           //ejemplo: 'mongodb://localhost/NOMBRE_DB'
     }
 

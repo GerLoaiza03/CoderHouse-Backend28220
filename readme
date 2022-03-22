@@ -1,0 +1,11 @@
+IMPORTANTE: Para arrancar esta aplicacion servidor:
+
+1- Moverse al directorio "2da_pre-entrega"
+2- Ejecutar npm install
+3- Ejecutar npm start
+
+
+Nota: En la ruta src\config\getSystemConfigurationParameters.js, puede verificar 
+
+NOTA: esta aplicación es una aplicacion desarrolada para ejecutarse
+sobre nodejs -> Se requeire nodejs instalado
