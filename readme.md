@@ -3,8 +3,8 @@
 LOG-IN POR FORMULARIO
 
 ## Iniciar App
-
-1. npm install 
+ 
+1. npm install
 2. npm run start
 3. Ingresar a 'localhost:8080/login'
 4. Para realizar login, ingresar cualquier nombre/dato.
