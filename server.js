@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const expbs = require("express-handlebars");
+require("dotenv").config({ path: "./config/.env" });
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
 const path = require("path");
@@ -13,23 +14,19 @@ const io = new IOServer(httpServer);
 
 /*      PERSISTENCIA POR MONGO ATLAS     */
 const connectMongo = require("connect-mongo");
-const MongoStore = connectMongo.create({
-  mongoUrl: 'mongodb+srv://german:german123@cluster0.bl5oh.mongodb.net/sesiones?retryWrites=true&w=majority',
-  ttl: 60
-})
+const adavancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 /* ------------------------------------- */
 
 //Session config
 app.use(cookieParser());
 app.use(session({
-  store: MongoStore,
-  secret: '123456789!@#$%^&*()',
+  store: connectMongo.create({
+    mongoUrl: process.env.MONGOATLAS,
+    mongoOptions: adavancedOptions,
+  }),
+  secret: "secreto",
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    secure: 'auto',
-    maxAge: 100000//
-  }
 })
 );
 
