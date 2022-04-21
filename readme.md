@@ -1,20 +1,38 @@
-# Desafio 14 - 
+# Desafio 15 Balanceo de Carga
 
-Usando el objeto process
+Este repositorio usa express y persiste las sesiones de usuarios en mongo atlas.
+También permite el login mediante Facebook.
 
-## Iniciar App
+## Run
 
-1. npm install
-2. npm run start
-3. Ingresar a 'localhost:8080/login'
-4. Para realizar login con facebook.
+Se instala:
+
+npm i nodemon pm2 forever -g
+
+$  node index.js -p {PORT_NUMBER} [-m cluster]
+
+Para selección del puerto mediante arg: -p {PORT_NUMBER}
+Para correr el server en modo cluster se debe agregar el argumento: -m cluster
 
 ## Rutas
 
- 1. post localhost:8080/login
- 2. post localhost:8080/logout
- 3. get localhost:8080/info
- 4. get localhost:8080/api/randoms   // Devuelve una cantidad de números aleatorios en el rango del 1 al 1000 especificada por parámetros de consulta (query). Por ej: /api/randoms?cant=20000. Si dicho parámetro no se ingresa, calcula 100.000.000 de números.
+### NODEMON
+
+$  nodemon index.js -p 8081 -m cluster
+
+### PM2 CLUSTER
+
+$  pm2 start index.js --watch -i max -f
+$  tasklist /fi "imagename eq node.exe"
+### PM2 FORK
+
+$  pm2 start index.js --watch
+$  pm2 list
+
+### FOREVER CLUSTER
+
+$  forever start index.js -p 8081 -m cluster
+$  forever list
 
 # Autor
 

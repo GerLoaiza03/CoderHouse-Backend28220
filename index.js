@@ -8,7 +8,33 @@ const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true};
 
 const args = parseArgs(process.argv.slice(2), {alias: {p: 'PUERTO'} });
 const PORT = args.PUERTO || 8080
+const MODO = args.MODO || 'fork' //
 const app = express();
+
+//
+const cluster = require('cluster')
+const numCPUs = require('os').cpus().length
+
+/* --------------------------------------------------------------------------- */
+/* MASTER */
+if (cluster.isMaster && MODO == 'cluster') {
+  console.log(numCPUs)
+  console.log(`PID MASTER ${process.pid}`)
+
+  for (let i = 0; i < numCPUs; i++) {
+      cluster.fork()
+  }
+
+  cluster.on('exit', worker => {
+      console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+      cluster.fork()
+  })
+}
+else {
+
+  /* --------------------------------------------------------------------------- */
+  /* WORKERS */
+
 
 app.use(session({
     store: MongoStore.create({
@@ -121,6 +147,7 @@ app.get('/info', (req, res) => {
   <li>Memoria total reservada: ${`${Math.round(
     process.memoryUsage().rss / 1024
   )} KB`}</li>
+  <li>numcpu: ${numCPUs}</li>
 </ul>`);
 });
   
@@ -135,9 +162,10 @@ app.get('/info', (req, res) => {
   // }});
 // })
 
-const randomRouter = require('./routes/random');
-app.use('/api/randoms',randomRouter)
+  const randomRouter = require('./routes/random');
+  app.use('/api/randoms',randomRouter)
 
-app.listen(PORT, () => {
-  console.log(`Servidor express escuchando en el puerto ${PORT}`)
-})
+  app.listen(PORT, () => {
+    console.log(`[PID: ${process.pid}] Servidor express escuchando en el puerto ${PORT}`)
+  })
+}
