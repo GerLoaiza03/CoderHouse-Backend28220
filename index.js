@@ -3,13 +3,17 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const parseArgs = require('minimist');
+const compression = require('compression')
+const logger = require('./utils/logger.js')
+
 const { Strategy: FacebookStrategy } = require('passport-facebook');
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true};
 
-const args = parseArgs(process.argv.slice(2), {alias: {p: 'PUERTO'} });
-const PORT = args.PUERTO || 8080
+const args = parseArgs(process.argv.slice(2), {alias: {p: 'PUERTO', m: "MODO"} });
+const PORT = process.env.PORT || args.PUERTO || 8080
 const MODO = args.MODO || 'fork' //
 const app = express();
+app.use(compression());
 
 //
 const cluster = require('cluster')
@@ -87,8 +91,16 @@ app.engine('hbs', exphbs.engine({
 
 // app.set('view engine', 'handlebars')
 app.use(express.static('public'));
+app.use(express.static('views'));
 app.set('views', './views');
 app.use(express.urlencoded({ extended: true }));
+
+/* Routes */
+
+app.all('/*', function (req, res, next) {
+  logger.info(`Recibe ${req.method} a ${req.path}`);
+  next();
+})
 
 app.get('/', function (req, res){
   if (req.isAuthenticated()) {
@@ -165,7 +177,15 @@ app.get('/info', (req, res) => {
   const randomRouter = require('./routes/random');
   app.use('/api/randoms',randomRouter)
 
-  app.listen(PORT, () => {
-    console.log(`[PID: ${process.pid}] Servidor express escuchando en el puerto ${PORT}`)
+   app.use((req, res, next) => {
+    res.status(404);
+    logger.warn(`Not Found: ${req.method} a ${req.path}`);
+    next();
   })
+
+  const server = app.listen(PORT, () => {
+    logger.info(`[PID: ${process.pid}] Servidor express escuchando en el puerto ${PORT}`)
+  })
+
+  server.on('error', error => logger.error(`Error en servidor: ${error}`))
 }
