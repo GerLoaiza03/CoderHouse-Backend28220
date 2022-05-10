@@ -62,7 +62,7 @@ const FACEBOOK_CLIENT_SECRET = process.env.FB_CLIENT_SECRET;
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_CLIENT_ID,
     clientSecret: FACEBOOK_CLIENT_SECRET,
-    callbackURL: `http://localhost:${PORT}/auth/facebook/callback`,
+    callbackURL: `https://desafio17-ger.herokuapp.com/${PORT}/auth/facebook/callback`,
     profileFields: [ 'id', 'displayName', 'photos', 'emails' ],
     scope: [ 'email' ]
 }, (accessToken, refreshToken, userProfile, done) => {
