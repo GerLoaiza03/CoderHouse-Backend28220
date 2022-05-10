@@ -13,3 +13,17 @@
 [2022-05-09T19:42:08.074] [WARN] default - Not Found: GET a /css/styles.css
 [2022-05-09T19:42:08.275] [WARN] default - Not Found: GET a /css/styles.css
 [2022-05-09T19:42:08.547] [WARN] default - Not Found: GET a /favicon.ico
+[2022-05-09T20:32:14.146] [WARN] default - Not Found: GET a /socket.io/socket.io.js
+[2022-05-09T20:32:14.156] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:32:14.253] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:32:14.411] [WARN] default - Not Found: GET a /favicon.ico
+[2022-05-09T20:32:16.721] [WARN] default - Not Found: GET a /socket.io/socket.io.js
+[2022-05-09T20:32:16.737] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:32:23.191] [WARN] default - Not Found: GET a /socket.io/socket.io.js
+[2022-05-09T20:32:23.239] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:32:59.613] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:32:59.618] [WARN] default - Not Found: GET a /socket.io/socket.io.js
+[2022-05-09T20:33:00.398] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:33:04.940] [WARN] default - Not Found: GET a /css/styles.css
+[2022-05-09T20:33:04.942] [WARN] default - Not Found: GET a /socket.io/socket.io.js
+[2022-05-09T20:33:05.050] [WARN] default - Not Found: GET a /css/styles.css
