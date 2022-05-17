@@ -23,7 +23,7 @@ const removeField = (record, field) => {
 //Conexion a la base de datos
 
 const main = () => {
-  const conexion = `mongodb+srv://${process.env.USERPASSMONGO}@clustercoderhouse.jxmzx.mongodb.net/ecommerce?retryWrites=true&w=majority`;
+  const conexion = `mongodb+srv://${process.env.USERPASSMONGO}@cluster0.bl5oh.mongodb.net/sesiones?retryWrites=true&w=majority`
   mongoose.connect(conexion);
   mongoose.connection.on("open", () => {
     loggerConsola.info("Base de datos conectada con exito!!")

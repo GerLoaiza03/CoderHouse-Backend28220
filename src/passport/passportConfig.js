@@ -60,7 +60,7 @@ passport.use("local-signup", new LocalStrategy({
     //Envio de mail al administrador de la pagina
     const mailOptions = {
       from:"Servidor node.js",
-      to: "gon.moure@gmail.com",
+      to: "ger.prueba02@gmail.com",
       subject: "Nuevo registro",
       html : 'Datos del nuevo usuario <br>' + JSON.stringify(userNew)
     }
