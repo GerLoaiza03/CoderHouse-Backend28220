@@ -32,18 +32,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
   //Routes
-const produtosRoute = require("./routes/productos");
-app.use("/api/productos", produtosRoute);
-const carritoRoute = require("./routes/carrito");
-app.use("/api/carrito", carritoRoute);
-const register = require("./routes/register");
-app.use("/register", register);
-const login = require("./routes/login");
-app.use("/login", login);
-const logout = require("./routes/logout");
-app.use("/logout", logout);
-const ordenes = require("./routes/ordenes");
-app.use("/api/ordenes", ordenes)
+  const produtosRoute = require("./src/routes/productos");
+  app.use("/api/productos", produtosRoute);
+  const carritoRoute = require("./src/routes/carrito");
+  app.use("/api/carrito", carritoRoute);
+  const register = require("./src/routes/register");
+  app.use("/register", register);
+  const login = require("./src/routes/login");
+  app.use("/login", login);
+  const logout = require("./src/routes/logout");
+  app.use("/logout", logout);
+  const ordenes = require("./src/routes/ordenes");
+  app.use("/api/ordenes", ordenes)
 
   //Manejo error 404
 app.use((req, res, next) => {

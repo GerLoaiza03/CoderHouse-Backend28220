@@ -1,3 +1,9 @@
 node_modules
-comandos.js
 .env
+benchmark.js
+error.log
+index_cluster.js
+index2.js
+warn.log
+comandos.js
+test
