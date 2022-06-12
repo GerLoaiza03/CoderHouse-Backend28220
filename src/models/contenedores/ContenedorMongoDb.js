@@ -26,10 +26,10 @@ const main = () => {
   const conexion = `mongodb+srv://${process.env.USERPASSMONGO}@cluster0.bl5oh.mongodb.net/sesiones?retryWrites=true&w=majority`
   mongoose.connect(conexion);
   mongoose.connection.on("open", () => {
-    loggerConsola.info("Base de datos conectada con exito!!")
+    loggerConsola.info("Base de datos conectada con exito!!");
   });
   mongoose.connection.on("error", () => {
-    loggerError.error("Error al conectarse a la base de datos!!")
+    loggerError.error("Error al conectarse a la base de datos!!");
   });
 };
 main();
@@ -48,7 +48,7 @@ class ContenedorMongoDB {
       removeField(doc, "__v");
       return doc;
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el save");
     }
   }
@@ -64,7 +64,7 @@ class ContenedorMongoDB {
         return false;
       }
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el getById");
     }
   }
@@ -76,7 +76,7 @@ class ContenedorMongoDB {
       docs = docs.map((d) => renameField(d, "_id", "id"));
       return docs;
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el getAll");
     }
   }
@@ -90,7 +90,7 @@ class ContenedorMongoDB {
         return { err: "Error en item, id no encontrado" };
       }
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el deleteById");
     }
   }
@@ -100,7 +100,7 @@ class ContenedorMongoDB {
       await this.coleccion.deleteMany({});
       return { msg: "Todos los productos borrados" };
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el deleteAll()");
     }
   }
@@ -120,7 +120,7 @@ class ContenedorMongoDB {
         return asPOJO(nuevoElem);
       }
     } catch (error) {
-      loggerError.error(error)
+      loggerError.error(error);
       throw Error("Error en el update");
     }
   }

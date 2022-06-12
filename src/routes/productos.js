@@ -16,13 +16,13 @@ router.get("/", getPtos);
 router.get("/:id", getPtoId);
 
 //POST CON PTO NUEVO ENVIADO POR PARAMETRO
-router.post("/", middlewares.isAdmin, createPto);
+router.post("/"/* , middlewares.isAdmin */, createPto);
 
 //PUT MODIFICANDO SEGUN ID
-router.put("/:id", middlewares.isAdmin, updatePto);
+router.put("/:id"/* , middlewares.isAdmin */, updatePto);
 
 //DELETE SEGUN ID
-router.delete("/:id", middlewares.isAdmin, deletePto);
+router.delete("/:id"/* , middlewares.isAdmin */, deletePto);
 
 //EXPORT MODULO ROUTER
 module.exports = router;

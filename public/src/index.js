@@ -22,8 +22,7 @@ function mainLogin(){
     })
     .catch(function(error) {
         console.log(error);
-      });
-
+    });
 }
 
 socket.on("render", (data)=>{
@@ -45,7 +44,7 @@ socket.on("render", (data)=>{
     })
     .catch(function(error) {
         console.log(error);
-      });
+    });
 
 /*     mainLogin();
     renderTabla();
@@ -100,10 +99,9 @@ function renderTabla(){
             fila.appendChild(aux8);
             tabla.appendChild(fila);
         }
-      
     })
     .catch(function(error) {
-      console.log(error);
+        console.log(error);
     });
     return false;
 }
@@ -140,7 +138,7 @@ function renderCarrito(){
         
     })
     .catch(function(error) {
-      console.log(error);
+        console.log(error);
     });
     return false;
 }
@@ -164,7 +162,7 @@ function agregarPto(){
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
-          }
+        }
     }
     /* Funcion fetch para añadir un nuevo producto mediante POST */
     fetch(url, request)
@@ -183,7 +181,7 @@ function agregarPtoCarrito(id){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-          }
+        }
     }
     fetch(url, request)
     .then(function() {
@@ -200,7 +198,7 @@ function borrarPtoCarrito(id) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
-          }
+        }
     }
 
     /* Funcion fetch para borrar el producto del carrito mediante DELETE */
@@ -240,7 +238,6 @@ function editarProducto() {
         /* Todo OK renderizo la tabla para todos los clientes conectados*/
         socket.emit("actualizacion");
     });
-  
     return false;
     
 }
@@ -263,7 +260,6 @@ function borrarProducto() {
         /* Todo OK renderizo la tabla para todos los clientes conectados*/
         socket.emit("actualizacion");
     });
-  
     return false;
 }
 
@@ -273,7 +269,7 @@ function cashout(){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-          }
+        }
     }
     fetch(url, request)
     .then(function() {
@@ -305,7 +301,7 @@ function logout(){
     })
     .catch(function(error) {
         console.log(error);
-      });
+    });
 
 
 }
@@ -315,29 +311,27 @@ let myModal = document.getElementById('exampleModal')
 let myModal2 = document.getElementById('exampleModal2')
 
 myModal.addEventListener('shown.bs.modal', function (event) {
-  let button = event.relatedTarget;
+    let button = event.relatedTarget;
   // Obtengo el id
-  let id = button.getAttribute('data-bs-id');
+    let id = button.getAttribute('data-bs-id');
 
-  let modalBodyInput = exampleModal.querySelector('.modal-body input')
-  
-  let inId = document.getElementById('idM');
-  let inTitulo = document.getElementById('tituloM');
-  let inDescripcion = document.getElementById('descripcionM');
-  let inCodigo = document.getElementById('codigoM');
-  let inThumbail = document.getElementById('thumbailM');
-  let inPrecio = document.getElementById('precioM');
-  let inStock = document.getElementById('stockM');
-  
+    let modalBodyInput = exampleModal.querySelector('.modal-body input')
+    
+    let inId = document.getElementById('idM');
+    let inTitulo = document.getElementById('tituloM');
+    let inDescripcion = document.getElementById('descripcionM');
+    let inCodigo = document.getElementById('codigoM');
+    let inThumbail = document.getElementById('thumbailM');
+    let inPrecio = document.getElementById('precioM');
+    let inStock = document.getElementById('stockM');
     /* Armando request para la funcion fetch */
     const url = '/api/productos/'+id;
     let request = {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
-          }
+        }
     }
-
     /* Funcion fetch para traer los productos mediante GET */
     fetch(url, request)
     .then((resp) => resp.json())
@@ -358,26 +352,22 @@ myModal2.addEventListener('shown.bs.modal', function (event) {
     let button = event.relatedTarget;
     // Obtengo el id
     let id = button.getAttribute('data-bs-id');
-  
     let modalBodyInput = exampleModal.querySelector('.modal-body input')
-  
     let inId = document.getElementById('idMB');
     
       /* Armando request para la funcion fetch */
-      const url = '/api/productos/'+id;
-      let request = {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json'
+    const url = '/api/productos/'+id;
+    let request = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
             }
-      }
-  
+    }
       /* Funcion fetch para traer el producto mediante GET */
-      fetch(url, request)
-      .then((resp) => resp.json())
-      .then(function(data) {
-          /* Todo OK dejo el id cargado*/
-          inId.value = (data.id);
-      });
-  
-  })
+    fetch(url, request)
+    .then((resp) => resp.json())
+    .then(function(data) {
+        /* Todo OK dejo el id cargado*/
+        inId.value = (data.id);
+    });
+})

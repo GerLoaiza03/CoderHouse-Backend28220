@@ -1,12 +1,13 @@
 {
-  "name": "desafio16",
+  "name": "desafio20",
   "version": "1.0.0",
-  "description": "",
+  "description": "USERPASSMONGO = 'usuario:password'\r NODEMMAILER_USER = 'correo gmail'\r NODEMAILER_PASS = 'clave de 16 digitos alterna'\r TWILIO_SID = 'codigo inicia AC'\r TWILIO_TOKEN = 'Token inicia ab'\r SESSION_SECRET = misecreto\r NODE_ENV = 'puede ser test, production, development'",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "app": "node index.js",
-    "test": "node index_cluster.js"
+    "nodemonStart": "nodemon index.js",
+    "test": "mocha src/test/apirest.test.js"
   },
   "repository": {
     "type": "git",
@@ -15,28 +16,27 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
+  },
   "bugs": {
     "url": "https://github.com/GerLoaiza03/CoderHouse-Backend28220/issues"
   },
   "homepage": "https://github.com/GerLoaiza03/CoderHouse-Backend28220#readme",
   "dependencies": {
-    "autocannon": "^7.9.0",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
-    "compression": "^1.7.4",
-    "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.5",
     "express-session": "^1.17.2",
     "log4js": "^6.4.6",
-    "minimist": "^1.2.6",
-    "mongodb": "^4.5.0",
     "mongoose": "^6.3.3",
     "multer": "^1.4.4",
     "nodemailer": "^6.7.5",
     "passport": "^0.5.2",
-    "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0",
     "socket.io": "^4.5.0",
     "twilio": "^3.77.0"

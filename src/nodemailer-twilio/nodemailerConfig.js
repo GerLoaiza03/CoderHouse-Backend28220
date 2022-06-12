@@ -10,6 +10,6 @@ const transporter = nodemailer.createTransport({
         user: `${process.env.NODEMMAILER_USER}`,
         pass: `${process.env.NODEMAILER_PASS}`
     }
-  });
+});
 
-  module.exports = transporter;
+module.exports = transporter;
