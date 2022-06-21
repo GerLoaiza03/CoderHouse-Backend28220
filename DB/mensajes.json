@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2022-06-20T21:08:01.208Z",
+    "author": {
+      "email": "ger@prueba.com",
+      "firstName": "Germán",
+      "lastName": "Loaiza",
+      "age": "32",
+      "alias": "ger",
+      "avatar": "https://e7.pngegg.com/pngimages/509/595/png-clipart-monkey-d-luffy-one-piece-one-piece-television-hat.png"
+    },
+    "text": "Prueba"
+  }
+]

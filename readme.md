@@ -1,16 +1,23 @@
-# Desafio 20
+# Desafío 22 - Programación Backend
 
-USERPASSMONGO = 'usuario:password'
-NODEMMAILER_USER = 'correo gmail'
-NODEMAILER_PASS = 'clave de 16 digitos alterna'
-TWILIO_SID = 'codigo inicia AC'
-TWILIO_TOKEN = 'Token inicia ab'
-SESSION_SECRET = misecreto
-NODE_ENV = 'puede ser test, production, development'
+### CoderHouse
 
-# Corriendo App
+## REFORMAR PARA USAR GRAPHQL
 
-"start": "nodemon index.js",
-"app": "node index.js",
-"nodemonStart": "nodemon index.js",
-"test": "mocha src/test/apirest.test.js"
+Refactoricemos el código del proyecto que venimos trabajando para cambiar de API RESTful a GraphQL API.
+
+### Ejecución
+
+Para ejecutar usar 
+Modo Desarrollo = npm run dev
+Modo Producción = npm run dev
+
+### API
+
+Se montó la **API GraphQL** sobre la ruta `/api`.
+
+http://localhost:8080/api
+
+### DOCS
+
+En archivo PDF Desafio 21 - Backend CoderHouse, se encuentran pantallazos de los query ejecutados en GraphQL API.
