@@ -2,15 +2,19 @@
 
 ### CoderHouse
 
-## REFORMAR PARA USAR GRAPHQL
+## REFORMAR PARA USAR OTRO FRAMEWORK
 
-Refactoricemos el código del proyecto que venimos trabajando para cambiar de API RESTful a GraphQL API.
+Retomar el proyecto con el que vemos trabajando para trasladarlo a uno de los frameworks presentados
 
 ### Ejecución
 
 Para ejecutar usar 
 Modo Desarrollo = npm run dev
-Modo Producción = npm run dev
+Modo Producción = npm run start
+
+Se selecciono el framework KOA para llevar a cabo la migración.
+
+La Capa de ruteo (servidor, routers,middlewares y controllers) fue la que sufrió los cambios, el resto de las capas (servicio, modelo, presentación) son ajenas al framework al momento de surtir la migración.
 
 ### API
 
@@ -20,4 +24,4 @@ http://localhost:8080/api
 
 ### DOCS
 
-En archivo PDF Desafio 21 - Backend CoderHouse, se encuentran pantallazos de los query ejecutados en GraphQL API.
+En archivo PDF Desafio 22 - Backend CoderHouse, se encuentran pantallazos comparacion EXPRESS VS KOA
