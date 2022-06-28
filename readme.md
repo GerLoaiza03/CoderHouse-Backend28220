@@ -1,4 +1,4 @@
-# Desafío 22 - Programación Backend
+# Desafío 21 - Programación Backend
 
 ### CoderHouse
 
@@ -10,7 +10,7 @@ Refactoricemos el código del proyecto que venimos trabajando para cambiar de AP
 
 Para ejecutar usar 
 Modo Desarrollo = npm run dev
-Modo Producción = npm run dev
+Modo Producción = npm run start
 
 ### API
 
