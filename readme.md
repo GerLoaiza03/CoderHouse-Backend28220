@@ -1,27 +1,41 @@
-# Desafío 22 - Programación Backend
+# Desafío 23 - Programación Backend
 
 ### CoderHouse
 
-## REFORMAR PARA USAR OTRO FRAMEWORK
+# SERVIDOR EN DENO
 
-Retomar el proyecto con el que vemos trabajando para trasladarlo a uno de los frameworks presentados
+Consigna: 
+1. Crear un servidor que utilice el módulo http servest y genere la vista con React render.
 
-### Ejecución
+2. Configurar denon para que, ante un cambio de código, el servidor de reinicie automáticamente.
+    
+    El servidor presentará en su ruta raíz un formulario de ingreso de un color, que será enviado al mismo por método post. Dicho color (en inglés) será incorporado a un array de colores persistido en memoria.
+    
+    Por debajo del formulario se deberán representar los colores recibidos en una lista desordenada (ul) utilizando el mismo color para la letra en cada caso. El color de fondo del la vista será negro.
 
-Para ejecutar usar 
-Modo Desarrollo = npm run dev
-Modo Producción = npm run start
+NOTA: El servidor deberá tener extensión tsx para el correcto funcionamiento de la sintaxis de vista de React en Typescript.
 
-Se selecciono el framework KOA para llevar a cabo la migración.
 
-La Capa de ruteo (servidor, routers,middlewares y controllers) fue la que sufrió los cambios, el resto de las capas (servicio, modelo, presentación) son ajenas al framework al momento de surtir la migración.
+## Ejecución
 
-### API
+Se configuro DENON el similar a NODEMON en Node, para facilitar la ejecución de la app, mediante archivon DENON.json
 
-Se montó la **API GraphQL** sobre la ruta `/api`.
+### instalar deno
 
-http://localhost:8080/api
+iwr https://deno.land/x/install/install.ps1 -useb | iex
 
-### DOCS
+### instalar denon
 
-En archivo PDF Desafio 22 - Backend CoderHouse, se encuentran pantallazos comparacion EXPRESS VS KOA
+deno install -qAf --unstable https://deno.land/x/denon/denon.ts.
+
+### Para ejecutar usar 
+
+denon start
+
+es lo mismo que ejecutar 
+
+"deno run --allow-net --allow-read --allow-env ./src/server.tsx"
+
+## API
+
+http://localhost:8080/
