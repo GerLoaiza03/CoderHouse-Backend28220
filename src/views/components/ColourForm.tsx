@@ -8,9 +8,9 @@ const ColourForm = () => {
           type="text"
           name="color"
           className="form-control"
-          placeholder="Indroduce un color en inglés"
+          placeholder="Introduce un color en inglés"
         />
-        <button className="btn btn-outline-secondary" type="submit">
+        <button className="btn btn-outline-primary" type="submit">
           Enviar
         </button>
       </div>

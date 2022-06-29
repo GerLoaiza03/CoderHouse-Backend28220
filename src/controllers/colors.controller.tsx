@@ -25,8 +25,8 @@ export const getHome: RouteHandler = async req => {
         </head>
         <body
           style={{
-            backgroundColor: "black",
-            color: "white",
+            backgroundColor: "#D3D3D3",
+            color: "black",
             display: "flex",
             flexDirection: "column",
             alignItems: "center"

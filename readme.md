@@ -39,3 +39,9 @@ es lo mismo que ejecutar
 ## API
 
 http://localhost:8080/
+
+## Soporte APP
+
+<div align="center">
+   <img src="img/img.png">
+</div>
